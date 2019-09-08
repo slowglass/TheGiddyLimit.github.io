@@ -10,15 +10,13 @@
 
 	<title>Changelog - 5etools</title>
 
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<link rel="stylesheet" href="css/jquery-ui.css">
-	<link rel="stylesheet" href="css/jquery-ui-slider-pips.css">
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/bootstrap.css?v=1.79.19">
+	<link rel="stylesheet" href="css/jquery-ui.css?v=1.79.19">
+	<link rel="stylesheet" href="css/jquery-ui-slider-pips.css?v=1.79.19">
+	<link rel="stylesheet" href="css/style.css?v=1.79.19">
 	<link rel="icon" href="favicon.png">
 
-	<script type="text/javascript" src="js/styleswitch.js"></script>
-	<script type="text/javascript" src="js/navigation.js"></script>
-	<script type="text/javascript" src="js/browsercheck.js"></script>
+	<script type="text/javascript" src="js/header.js?v=1.79.19"></script>
 </head>
 
 <body>
@@ -36,18 +34,11 @@
 
 <main class="container" id="pagecontent"></main>
 <!--5ETOOLS_SCRIPT_ANCHOR-->
-<script type="text/javascript" src="js/utils.js"></script>
-<script type="text/javascript" src="js/utils-ui.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/combine/npm/jquery@3.2/dist/jquery.min.js,npm/list.js@1.5/dist/list.min.js,gh/weixsong/elasticlunr.js@0.9/elasticlunr.min.js"></script> <script>window.jQuery || document.write(`<script src="/lib/jquery.js"><\/script>`); window.List || document.write(`<script src="/lib/list.js"><\/script>`);</script>
+<script type="text/javascript" src="js/shared.js?v=1.79.19"></script>
 <script type="text/javascript" src="lib/localforage.js"></script>
-<script type="text/javascript" src="js/omnidexer.js"></script>
-<script type="text/javascript" src="js/omnisearch.js"></script>
-<script type="text/javascript" src="js/render.js"></script>
-<script type="text/javascript" src="js/scalecreature.js"></script>
-<script type="text/javascript" src="lib/list.js"></script>
-<script type="text/javascript" src="lib/jquery.js"></script>
 <script type="text/javascript" src="lib/jquery-ui.js"></script>
 <script type="text/javascript" src="lib/jquery-ui-slider-pip.js"></script>
-<script type="text/javascript" src="lib/elasticlunr.js"></script>
 <script>
 	ExcludeUtil.pInitialise(); // don't await, as this is only used for search
 
@@ -1475,6 +1466,18 @@ Filters -- completely overhauled internally:
 - Fixed "Deck of X" dice/card rollers
 - Fixed Spells page "Misc/Components" filter rendering/functionality
 - (Fixed typos/added tags)`
+		},
+		{
+			ver: "1.79.17",
+			date: "2019-09-05",
+			txt: `
+- Added UA: Sorcerer and Warlock content`
+		},
+		{
+			ver: "1.79.19",
+			date: "2019-09-07",
+			txt: `
+- Fixed case where loading a content blacklist would wipe loaded homebrew`
 		}
 	];
 
