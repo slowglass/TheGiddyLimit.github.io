@@ -1,24 +1,14 @@
-class RenderObjects {
-	static $getRenderedObject (obj) {
-		const renderer = Renderer.get().setFirstSection(true);
-		const renderStack = [];
-
-		if (obj.entries) renderer.recursiveRender({entries: obj.entries}, renderStack, {depth: 2});
-		if (obj.actionEntries) renderer.recursiveRender({entries: obj.actionEntries}, renderStack, {depth: 2});
-
-		return $$`
+class RenderObjects{static $getRenderedObject(a){const b=Renderer.get().setFirstSection(!0),c=[];return a.entries&&b.recursiveRender({entries:a.entries},c,{depth:2}),a.actionEntries&&b.recursiveRender({entries:a.actionEntries},c,{depth:2}),$$`
 			${Renderer.utils.getBorderTr()}
-			${Renderer.utils.getNameTr(obj)}
-			<tr class="text"><td colspan="6"><i>${obj.type !== "GEN" ? `${Parser.sizeAbvToFull(obj.size)} object` : `Variable size object`}</i><br></td></tr>
+			${Renderer.utils.getNameTr(a)}
+			<tr class="text"><td colspan="6"><i>${"GEN"===a.type?`Variable size object`:`${Parser.sizeAbvToFull(a.size)} object`}</i><br></td></tr>
 			<tr class="text"><td colspan="6">
-				<b>Armor Class:</b> ${obj.ac}<br>
-				<b>Hit Points:</b> ${obj.hp}<br>
-				<b>Damage Immunities:</b> ${obj.immune}<br>
-				${obj.resist ? `<b>Damage Resistances:</b> ${obj.resist}<br>` : ""}
-				${obj.vulnerable ? `<b>Damage Vulnerabilities:</b> ${obj.vulnerable}<br>` : ""}
+				<b>Armor Class:</b> ${a.ac}<br>
+				<b>Hit Points:</b> ${a.hp}<br>
+				<b>Damage Immunities:</b> ${a.immune}<br>
+				${a.resist?`<b>Damage Resistances:</b> ${a.resist}<br>`:""}
+				${a.vulnerable?`<b>Damage Vulnerabilities:</b> ${a.vulnerable}<br>`:""}
 			</td></tr>
-			<tr class="text"><td colspan="6">${renderStack.join("")}</td></tr>
-			${Renderer.utils.getPageTr(obj)}
-			${Renderer.utils.getBorderTr()}`
-	}
-}
+			<tr class="text"><td colspan="6">${c.join("")}</td></tr>
+			${Renderer.utils.getPageTr(a)}
+			${Renderer.utils.getBorderTr()}`}}

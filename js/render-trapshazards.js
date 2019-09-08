@@ -1,19 +1,7 @@
-class RenderTrapsHazards {
-	static $getRenderedTrapHazard (it) {
-		const renderStack = [];
-
-		Renderer.get().recursiveRender({entries: it.entries}, renderStack, {depth: 2});
-
-		const simplePart = Renderer.traphazard.getSimplePart(Renderer.get(), it);
-		const complexPart = Renderer.traphazard.getComplexPart(Renderer.get(), it);
-		const subtitle = Renderer.traphazard.getSubtitle(it);
-
-		return $$`
+class RenderTrapsHazards{static $getRenderedTrapHazard(a){const b=[];Renderer.get().recursiveRender({entries:a.entries},b,{depth:2});const c=Renderer.traphazard.getSimplePart(Renderer.get(),a),d=Renderer.traphazard.getComplexPart(Renderer.get(),a),e=Renderer.traphazard.getSubtitle(a);return $$`
 		${Renderer.utils.getBorderTr()}
-		${Renderer.utils.getNameTr(it)}
-		${subtitle ? `<tr class="text"><td colspan="6"><i>${Renderer.traphazard.getSubtitle(it)}</i></td>` : ""}
-		<tr class="text"><td colspan="6">${renderStack.join("")}${simplePart || ""}${complexPart || ""}</td></tr>
-		${Renderer.utils.getPageTr(it)}
-		${Renderer.utils.getBorderTr()}`;
-	}
-}
+		${Renderer.utils.getNameTr(a)}
+		${e?`<tr class="text"><td colspan="6"><i>${Renderer.traphazard.getSubtitle(a)}</i></td>`:""}
+		<tr class="text"><td colspan="6">${b.join("")}${c||""}${d||""}</td></tr>
+		${Renderer.utils.getPageTr(a)}
+		${Renderer.utils.getBorderTr()}`}}

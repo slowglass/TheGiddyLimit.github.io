@@ -1,16 +1,8 @@
-class RenderBackgrounds {
-	static $getRenderedBackground (bg) {
-		const renderStack = [];
-		const entryList = {type: "entries", entries: bg.entries};
-		Renderer.get().setFirstSection(true).recursiveRender(entryList, renderStack);
-
-		return $$`
+class RenderBackgrounds{static $getRenderedBackground(a){const b=[],c={type:"entries",entries:a.entries};return Renderer.get().setFirstSection(!0).recursiveRender(c,b),$$`
 		${Renderer.utils.getBorderTr()}
-		${Renderer.utils.getNameTr(bg)}
+		${Renderer.utils.getNameTr(a)}
 		<tr><td class="divider" colspan="6"><div></div></td></tr>
-		<tr class="text"><td colspan="6">${renderStack.join("")}</td></tr>
-		${Renderer.utils.getPageTr(bg)}
+		<tr class="text"><td colspan="6">${b.join("")}</td></tr>
+		${Renderer.utils.getPageTr(a)}
 		${Renderer.utils.getBorderTr()}
-		`
-	}
-}
+		`}}

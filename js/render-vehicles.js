@@ -1,5 +1,1 @@
-class RenderVehicles {
-	static $getRenderedVehicle (vehicle) {
-		return $$`${Renderer.vehicle.getRenderedString(vehicle)}`;
-	}
-}
+class RenderVehicles{static $getRenderedVehicle(a){return $$`${Renderer.vehicle.getRenderedString(a)}`}}

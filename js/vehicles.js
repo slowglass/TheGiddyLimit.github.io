@@ -1,115 +1,17 @@
-"use strict";
-
-class VehiclesPage extends ListPage {
-	constructor () {
-		const sourceFilter = getSourceFilter();
-
-		super({
-			dataSource: "data/vehicles.json",
-			dataSourceFluff: "data/fluff-vehicles.json",
-
-			filters: [
-				sourceFilter
-			],
-			filterSource: sourceFilter,
-
-			listValueNames: ["name", "source", "uniqueid"],
-			listClass: "vehicles",
-
-			sublistValueNames: ["name", "id"],
-			sublistClass: "subvehicles",
-
-			dataProps: ["vehicle"]
-		});
-
-		this._sourceFilter = sourceFilter;
-	}
-
-	getListItem (it, shI) {
-		// populate filters
-		this._sourceFilter.addItem(it.source);
-
-		return `
-			<li class="row" ${FLTR_ID}="${shI}" onclick="ListUtil.toggleSelected(event, this)" oncontextmenu="ListUtil.openContextMenu(event, this)">
-				<a id="${shI}" href="#${UrlUtil.autoEncodeHash(it)}" title="${it.name}">
-					<span class="name col-10 pl-0">${it.name}</span>
-					<span class="source col-2 text-center ${Parser.sourceJsonToColor(it.source)} pr-0" title="${Parser.sourceJsonToFull(it.source)}" ${BrewUtil.sourceJsonToStyle(it.source)}>${Parser.sourceJsonToAbv(it.source)}</span>
+"use strict";class VehiclesPage extends ListPage{constructor(){const a=getSourceFilter();super({dataSource:"data/vehicles.json",dataSourceFluff:"data/fluff-vehicles.json",filters:[a],filterSource:a,listValueNames:["name","source","uniqueid"],listClass:"vehicles",sublistValueNames:["name","id"],sublistClass:"subvehicles",dataProps:["vehicle"]}),this._sourceFilter=a}getListItem(a,b){return this._sourceFilter.addItem(a.source),`
+			<li class="row" ${FLTR_ID}="${b}" onclick="ListUtil.toggleSelected(event, this)" oncontextmenu="ListUtil.openContextMenu(event, this)">
+				<a id="${b}" href="#${UrlUtil.autoEncodeHash(a)}" title="${a.name}">
+					<span class="name col-10 pl-0">${a.name}</span>
+					<span class="source col-2 text-center ${Parser.sourceJsonToColor(a.source)} pr-0" title="${Parser.sourceJsonToFull(a.source)}" ${BrewUtil.sourceJsonToStyle(a.source)}>${Parser.sourceJsonToAbv(a.source)}</span>
 					
-					<span class="uniqueid hidden">${it.uniqueId ? it.uniqueId : shI}</span>
+					<span class="uniqueid hidden">${a.uniqueId?a.uniqueId:b}</span>
 				</a>
 			</li>
-		`;
-	}
-
-	handleFilterChange () {
-		const f = this._filterBox.getValues();
-		this._list.filter((item) => {
-			const it = this._dataList[$(item.elm).attr(FLTR_ID)];
-			return this._filterBox.toDisplay(
-				f,
-				it.source
-			);
-		});
-		FilterBox.selectFirstVisible(this._dataList);
-	}
-
-	getSublistItem (it, pinId) {
-		return `
-			<li class="row" ${FLTR_ID}="${pinId}" oncontextmenu="ListUtil.openSubContextMenu(event, this)">
-				<a href="#${UrlUtil.autoEncodeHash(it)}" title="${it.name}">
-					<span class="name col-12 px-0">${it.name}</span>
-					<span class="id hidden">${pinId}</span>
+		`}handleFilterChange(){const a=this._filterBox.getValues();this._list.filter(b=>{const c=this._dataList[$(b.elm).attr(FLTR_ID)];return this._filterBox.toDisplay(a,c.source)}),FilterBox.selectFirstVisible(this._dataList)}getSublistItem(a,b){return`
+			<li class="row" ${FLTR_ID}="${b}" oncontextmenu="ListUtil.openSubContextMenu(event, this)">
+				<a href="#${UrlUtil.autoEncodeHash(a)}" title="${a.name}">
+					<span class="name col-12 px-0">${a.name}</span>
+					<span class="id hidden">${b}</span>
 				</a>
 			</li>
-		`;
-	}
-
-	doLoadHash (id) {
-		Renderer.get().setFirstSection(true);
-		const vehicle = this._dataList[id];
-		const $content = $(`#pagecontent`).empty();
-
-		function buildStatsTab () {
-			$content.append(RenderVehicles.$getRenderedVehicle(vehicle));
-		}
-
-		function buildFluffTab (isImageTab) {
-			return Renderer.utils.pBuildFluffTab(
-				isImageTab,
-				$content,
-				vehicle,
-				(fluffJson) => vehicle.fluff || fluffJson.vehicle.find(it => it.name === vehicle.name && it.source === vehicle.source),
-				`data/fluff-vehicles.json`,
-				() => true
-			);
-		}
-
-		const statTab = Renderer.utils.tabButton(
-			"Item",
-			() => {},
-			buildStatsTab
-		);
-		const infoTab = Renderer.utils.tabButton(
-			"Info",
-			() => {},
-			buildFluffTab
-		);
-		const picTab = Renderer.utils.tabButton(
-			"Images",
-			() => {},
-			() => buildFluffTab(true)
-		);
-
-		Renderer.utils.bindTabButtons(statTab, infoTab, picTab);
-
-		ListUtil.updateSelected();
-	}
-
-	doLoadSubHash (sub) {
-		sub = this._filterBox.setFromSubHashes(sub);
-		ListUtil.setFromSubHashes(sub);
-	}
-}
-
-const vehiclesPage = new VehiclesPage();
-window.addEventListener("load", () => vehiclesPage.pOnLoad());
+		`}doLoadHash(a){function b(a){return Renderer.utils.pBuildFluffTab(a,d,c,a=>c.fluff||a.vehicle.find(a=>a.name===c.name&&a.source===c.source),`data/fluff-vehicles.json`,()=>!0)}Renderer.get().setFirstSection(!0);const c=this._dataList[a],d=$(`#pagecontent`).empty(),e=Renderer.utils.tabButton("Item",()=>{},function(){d.append(RenderVehicles.$getRenderedVehicle(c))}),f=Renderer.utils.tabButton("Info",()=>{},b),g=Renderer.utils.tabButton("Images",()=>{},()=>b(!0));Renderer.utils.bindTabButtons(e,f,g),ListUtil.updateSelected()}doLoadSubHash(a){a=this._filterBox.setFromSubHashes(a),ListUtil.setFromSubHashes(a)}}const vehiclesPage=new VehiclesPage;window.addEventListener("load",()=>vehiclesPage.pOnLoad());

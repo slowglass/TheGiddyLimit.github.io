@@ -1,37 +1,25 @@
-class RenderDeities {
-	static $getRenderedDeity (deity) {
-		return $$`
+class RenderDeities{static $getRenderedDeity(a){return $$`
 			${Renderer.utils.getBorderTr()}
-			${Renderer.utils.getNameTr(deity, {suffix: deity.title ? `, ${deity.title.toTitleCase()}` : ""})}
-			${RenderDeities._getDeityBody(deity)}
-			${deity.reprinted ? `<tr class="text"><td colspan="6"><i class="text-muted">Note: this deity has been reprinted in a newer publication.</i></td></tr>` : ""}
-			${Renderer.utils.getPageTr(deity)}
-			${deity.previousVersions ? `
+			${Renderer.utils.getNameTr(a,{suffix:a.title?`, ${a.title.toTitleCase()}`:""})}
+			${RenderDeities._getDeityBody(a)}
+			${a.reprinted?`<tr class="text"><td colspan="6"><i class="text-muted">Note: this deity has been reprinted in a newer publication.</i></td></tr>`:""}
+			${Renderer.utils.getPageTr(a)}
+			${a.previousVersions?`
 			${Renderer.utils.getDividerTr()}
-			${deity.previousVersions.map((d, i) => RenderDeities._getDeityBody(d, i + 1)).join(Renderer.utils.getDividerTr())}
-			` : ""}
+			${a.previousVersions.map((a,b)=>RenderDeities._getDeityBody(a,b+1)).join(Renderer.utils.getDividerTr())}
+			`:""}
 			${Renderer.utils.getBorderTr()}
-		`
-	}
-
-	static _getDeityBody (deity, reprintIndex) {
-		const renderer = Renderer.get();
-
-		const renderStack = [];
-		if (deity.entries) renderer.recursiveRender({entries: deity.entries}, renderStack);
-		return `
-			${reprintIndex ? `
+		`}static _getDeityBody(a,b){const c=Renderer.get(),d=[];return a.entries&&c.recursiveRender({entries:a.entries},d),`
+			${b?`
 				<tr><td colspan="6">
 				<i class="text-muted">
-				${reprintIndex === 1 ? `This deity is a reprint.` : ""} The version below was printed in an older publication (${Parser.sourceJsonToFull(deity.source)}${deity.page > 0 ? `, page ${deity.page}` : ""}).
+				${1===b?`This deity is a reprint.`:""} The version below was printed in an older publication (${Parser.sourceJsonToFull(a.source)}${0<a.page?`, page ${a.page}`:""}).
 				</i>
 				</td></tr>
-			` : ""}
+			`:""}
 	
-			${Renderer.deity.getOrderedParts(deity, `<tr><td colspan="6">`, `</td></tr>`)}
+			${Renderer.deity.getOrderedParts(a,`<tr><td colspan="6">`,`</td></tr>`)}
 			
-			${deity.symbolImg ? `<tr><td colspan="6">${renderer.render({entries: [deity.symbolImg]})}</td></tr>` : ""}
-			${renderStack.length ? `<tr class="text"><td colspan="6">${renderStack.join("")}</td></tr>` : ""}
-			`;
-	}
-}
+			${a.symbolImg?`<tr><td colspan="6">${c.render({entries:[a.symbolImg]})}</td></tr>`:""}
+			${d.length?`<tr class="text"><td colspan="6">${d.join("")}</td></tr>`:""}
+			`}}
